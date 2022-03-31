@@ -5,7 +5,7 @@ from django.contrib import messages
 
 
 
-def home(request):
+def index(request):
     import requests
     import json
     if request.method == 'POST':
@@ -14,7 +14,7 @@ def home(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("Stock Has Been Added! "))
-            return redirect('home')
+            return redirect('index')
     else: 
         ticker = Stock.objects.all()
         output = []
@@ -25,7 +25,7 @@ def home(request):
                 output.append(api)
             except Exception as err:
                 api = "Error"
-        return render(request, 'home.html', {'ticker' : ticker, 'output' : output})
+        return render(request, 'index.html', {'ticker' : ticker, 'output' : output})
 
 
 def search(request):
@@ -51,4 +51,4 @@ def delete(request, stock_id):
     item = Stock.objects.get(pk=stock_id) #Symbol Id Number In Database
     item.delete()
     messages.success(request, ("Stock Has Been Deleted!"))
-    return redirect('home')
+    return redirect('index')

@@ -3,7 +3,7 @@
 
 <h1>Portfolio</h1><br><br>
 
-<form action="{% url 'home' %}" class="d-flex" method="POST">
+<form action="{% url 'index' %}" class="d-flex" method="POST">
     {% csrf_token %}
   <input class="form-control me-2" type="search" placeholder="Add Ticker To Portfolio" aria-label="Search" name="ticker">
   <button class="btn btn-outline-success" type="submit">Search</button>
