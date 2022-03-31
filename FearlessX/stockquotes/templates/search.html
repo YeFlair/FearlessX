@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 style="text-align: center;">Fearless X</h3><br>
+<p style="text-align: center;">Search for a company's stock highlights by entering ticker into the seach bar. Unsure of companies ticker sysmbol? Click here <a href="https://finance.yahoo.com/lookup/". target="blank">Yahoo! finance</a></p>
+
+{% if ticker %}
+    {{ ticker }}
+{% endif %}
+
+
+{% if api %}
+    {% if api == "Error" %}
+        There was a problem with ticker symbol 
+    {% else %}
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Company Name</th>
+            <th scope="col">Stock Price</th>
+            <th scope="col">Previous Close</th>
+            <th scope="col">Market Cap</th>
+            <th scope="col">YTD Change</th>
+            <th scope="col">52 Week High</th>
+            <th scope="col">52 Week Low</th>
+  
+          </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <th scope="row">{{ api.companyName }} </th>
+                    <td>${{ api.latestPrice }} </td>
+                    <td>${{ api.previousClose }} </td>
+                    <td>${{ api.marketCap }} </td>
+                    <td>{{ api.ytdChange }}% </td>
+                    <td>${{ api.week52High }} </td>
+                    <td>${{ api.week52Low }} </td>
+                </tr>
+      
+        </tbody>
+      </table>
+    
+    {% endif %}
+
+    {% endif %}        
+{% endblock %}
